@@ -8,3 +8,8 @@ El uso de useMemo es para memorizar valores: este hook nos sirve para no volver 
 NOTA:
 El useMemo se diferencia del useCallback ya que el primero memoriza valores y el segundo memoriza funciones.
 ------------
+
+PARA LA NAVEGACION FILTRADA POR SEARCH:
+1.)Leer el componente SearchPage
+
+2.)
