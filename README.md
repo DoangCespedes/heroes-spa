@@ -10,6 +10,8 @@ El useMemo se diferencia del useCallback ya que el primero memoriza valores y el
 ------------
 
 PARA LA NAVEGACION FILTRADA POR SEARCH:
-1.)Leer el componente SearchPage
+1.)Leer el componente SearchPage y comprender la logica que esta en el, comprender la navegacion por el useNavigate y el useLocation propios de react-router-dom
 
-2.)
+2.)Importamos el coustomHook useForm para trabajar mas facil la logica del input de texto
+
+3.)Utilizamos el paquete query-string para que el mismo nos ayude a parsear la informacion que estamos obteniendo del location 

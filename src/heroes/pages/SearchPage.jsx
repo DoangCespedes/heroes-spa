@@ -1,30 +1,30 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
-import {HeroCard} from '../components'
 import queryString from 'query-string';
+import { getHeroesByName } from '../helpers';
+import { HeroCard } from '../components'
 
 export const SearchPage = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log({location})
+  const {q = ''} = queryString.parse(location.search)
+  const heroes = getHeroesByName(q);
 
+  // console.log(heroes)
   
 
-  const query = ( location.search ); 
-
   const {searchText, onInputChange} = useForm({
-    searchText: ''
+    searchText: q 
   })
 
   const onSearchSubmit = (e) =>{
     e.preventDefault();
 
-    if (searchText.trim().length <= 1 ) return; //El metodo trim nos ayuda a borrar espacios delante y al final del texto
+    //if (searchText.trim().length <= 1 ) return; //El metodo trim nos ayuda a borrar espacios delante y al final del texto
 
-    navigate(`?=${ searchText.toLowerCase().trim() }`)
-    console.log({ searchText})
+    navigate(`?q=${ searchText.toLowerCase().trim() }`)
   }
   return (
     <>
@@ -55,14 +55,19 @@ export const SearchPage = () => {
           <h4>Results</h4><hr/>
         
 
-          <div className="alert alert-primary">
-            Search a hero
-          </div>
-          <div className="alert alert-danger">
-            No hero with <b>{query}</b>
-          </div>
-
-          <HeroCard />
+          {
+            ( q === '')
+            ? <div className="alert alert-primary">Search a hero</div>
+            : (heroes.length === 0)
+            && <div className="alert alert-danger">No hero with <b>{ q }</b></div>
+          }
+          
+         
+          {
+            heroes.map(hero => (
+              <HeroCard className='col animate__animated animate__fadeIn' key={hero.id} {...hero}/>
+            )) 
+          }
         </div>
       </div>
     </>
